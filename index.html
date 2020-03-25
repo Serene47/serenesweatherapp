@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/node_modules/open-weather-icons/dist/css/open-weather-icons.css">
+    <link rel="stylesheet" media="screen and (max-width:999px)" href="/css/style-md.css">
+    <link rel="stylesheet" media="screen and (min-width:1000px)" href="/css/style-lg.css">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"> -->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <title>Serene47 Weather App</title>
+</head>
+<body ng-app="weatherApp" ng-cloak >
+    <main scroll-navigation >
+        <section class="title-section">
+            <div class="title">
+                <p>serene's</p>
+                <h1>Weather App</h1>
+            </div>
+            <nav>
+                <ul >
+                    <li><a class="nav-active" data-article="currentWeather" >Current Weather</a></li>
+                    <li><a data-article="forecast" >Forecast</a></li>
+                    <li><a data-article="about" >About</a></li>
+                </ul>
+            </nav>
+        </section>
+        <section class="content-section" ng-controller="mainController"  >
+            <article id="locationSelect">
+                <div class="location-controls" >
+                    <autocomplete onLocationSelect="onlocationselect(locationDetails)"></autocomplete>
+                    <span >OR</span>
+                    <button ng-click="useCurrentLocation()" id="currentLocation">
+                        <i class="fas fa-crosshairs" ></i> Use Current Location
+                    </button>
+                </div>
+            </article>
+            <article id="currentWeather" >
+                <div class="weather-main" ng-hide="!weatherAvaliable" >
+                    <p class="selected-location">{{weatherData.main.cityName}}</p>
+                    <div class="highlight" >
+                        <i ng-class="weatherData.main.iconClass"></i>
+                        <div>
+                            <p class="temperature">{{weatherData.main.temperature}} &#176; C</p>
+                            <p class="condition">{{weatherData.main.condition}}</p>
+                            <p class="description">{{weatherData.main.description}}</p>
+                        </div>
+                    </div>
+                    <p class="last-updated">Last Updated : {{weatherData.main.lastUpdated}}</p>
+                </div>
+                <div class="weather-additional" ng-hide="!weatherAvaliable" >
+                    <ul>
+                        <li>
+                            <span>Pressure</span>
+                            <span>{{weatherData.additional.pressure}} hPa</span>
+                        </li>
+                        <li>
+                            <span>Humidity</span>
+                            <span>{{weatherData.additional.humidity}} %
+                                <!-- g/m<sup>3</supc> -->
+                            </span>
+                        </li>
+                        <li>
+                            <span>Wind</span>
+                            <span >{{weatherData.additional.wind.speed}} m/s , 
+                                {{weatherData.additional.wind.degree}} &#176;
+                            </span>
+                        </li>
+                        <!--<li>
+                            <span>Rain</span>
+                            <span>0</span>
+                        </li> -->
+                        <li>
+                            <span>Cloudliness</span>
+                            <span>{{weatherData.additional.clouds}} %</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="no-data-content" ng-hide="weatherAvaliable">
+                    <p>{{noDataMessage}}</p>
+                </div>
+            </article>
+            <article id="forecast" >
+                <div class="forecast-wrapper" ng-hide="!forecastAvaliable" >
+                    <custom-select data="forecastData.forecastDates"  placeholder="Select a Date" ng-model="forecastDate"></custom-select>
+                    <div class="forecast-dates-tab" >
+                        <ul>
+                            <li ng-repeat="date in forecastData.forecastDates" ng-class="{'tab-active' : date.value == forecastDate}">
+                                <a ng-click="changeForecastDate(date.value)">{{date.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="forecast-data" >
+                        <ul >
+                            <li ng-repeat="data in forecastData.forecastData[forecastDate]">
+                                <span class="forecast-time">{{data.time}}</span>
+                                <span class="forecast-condition" ><i ng-class="data.iconClass" ></i>{{data.condition}}</span>
+                                <span class="forecast-temperature" >{{data.temperature}}&#176;C</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="no-data-content" ng-hide="forecastAvaliable">
+                    <p>{{noDataMessage}}</p>
+                </div>
+            </article>
+            <article id="about">
+                <p>Designed and developed by SERENE ABRAHAM MATHEW </p>
+                <p><i class="fas fa-envelope" ></i>serenemathew47@gmail.com</p>
+                <p><i class="fas fa-phone" ></i>8086455764</p>
+            </article>
+        </section>
+    </main> 
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/angular/angular.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/controller/mainController.js"></script>
+    <script src="/js/service/weatherService.js"></script>
+    <script src="/js/service/localStorageService.js"></script>
+    <script src="/js/service/geoLocationService.js"></script>
+    <script src="/js/directive/autocomplete.js"></script>
+    <script src="/js/directive/scrollNavigation.js"></script>
+    <script src="/js/directive/customSelect.js"></script>
+</body>
+</html>
