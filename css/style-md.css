@@ -25,16 +25,14 @@ ul {
 .title-section {
     background-color: var(--secondary-color);
     color : var(--primary-color);
-    position : fixed;
+    /* position : fixed;
     left : 0;
-    top : 0;
+    top : 0; */
     width : 100%;
     height: 100px;
-    font-size: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2;
 }
 
 .title {
@@ -51,17 +49,13 @@ ul {
     font-size: 30px;
 }
 
-.content-section {
-    margin-top: 100px;
-}
-
 
 /*************************************************** navigation ********************************************/
 
 nav {
     background-color: var(--secondary-color);
     color : var(--primary-color);
-    position : fixed;
+    position : absolute;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -168,7 +162,6 @@ nav li a{
     align-items: center;
     justify-content: center;
     height: 180px;
-    margin-top:75px;
     overflow: visible;
 }
 
