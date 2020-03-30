@@ -11,11 +11,11 @@ app.factory("weatherService",["$http",function($http){
 
         if(urltype == "current"){
 
-            url = "http://api.openweathermap.org/data/2.5/weather?";
+            url = "https://api.openweathermap.org/data/2.5/weather?";
 
         } else if(urltype == "forecast"){
 
-            url = "http://api.openweathermap.org/data/2.5/forecast?";
+            url = "https://api.openweathermap.org/data/2.5/forecast?";
         }
 
 
