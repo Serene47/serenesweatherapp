@@ -10,7 +10,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
-    "angular": "^1.7.8",
+    "angular": "^1.8.0",
     "jquery": "3.5.0",
     "open-weather-icons": "0.0.8"
   },
