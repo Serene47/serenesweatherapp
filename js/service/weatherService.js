@@ -3,8 +3,7 @@ app.factory("weatherService",["$http",function($http){
 
     var weatherService = {}
     
-    // temporarily removed api key to prevent missuse
-    weatherService.apiKey ="";
+    weatherService.apiKey ="01a5c660cd8f74579ab8ac0122b4b9c1";
 
     weatherService.buildUrl =function(locationDetails,urltype){
 
